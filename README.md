@@ -225,6 +225,68 @@ employee-family-registry
 ```
 
 ---
+## Screenshots
+
+### Employee Registry Dashboard
+Shows the main employee table with search, actions, and family overview.
+
+![Employee Registry](screenshots/registry.png)
+
+---
+
+### Global Search (Debounced)
+Search employees by name or other attributes.
+
+![Search Employees](screenshots/search.png)
+
+---
+
+### Add Employee Form
+Create a new employee with validation for NID, phone number, and salary.
+
+![Add Employee](screenshots/add-employee.png)
+
+---
+
+### Employee Form Validation
+Client-side validation for NID format and Bangladesh phone number.
+
+![Employee Validation](screenshots/employee-validation.png)
+
+---
+
+### Edit Employee
+Update employee information such as department, phone, or salary.
+
+![Edit Employee](screenshots/edit-employee.png)
+
+---
+
+### Family Management
+Add spouse (one-to-one relationship) and children (one-to-many relationship).
+
+![Family Management](screenshots/family.png)
+
+---
+
+### Family Validation
+Prevents adding more than one spouse and validates child information.
+
+![Family Validation](screenshots/family-validation.png)
+
+---
+
+### Employee Profile PDF (CV Export)
+Export a detailed PDF profile for an individual employee.
+
+![Employee CV PDF](screenshots/pdf-cv.png)
+
+---
+
+### Employee Registry PDF Export
+Generate a full PDF report of the employee registry.
+
+![Registry PDF Export](screenshots/pdf-list.png)
 ---
 
 # Database Setup (PostgreSQL)
