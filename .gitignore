@@ -1,0 +1,26 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+*.csproj.user
+
+# Visual Studio
+.vs/
+.vscode/
+
+# Logs
+*.log
+
+# Node
+node_modules/
+dist/
+build/
+
+# Environment
+.env
+
+# OS
+.DS_Store
+Thumbs.db
