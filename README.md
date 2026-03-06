@@ -1,23 +1,10 @@
 # Employee & Family Registry System
 
-Full-Stack .NET Technical Assessment  
-Fionetix Solutions
+A full-stack **Employee Management System** developed as part of the **.NET Developer Technical Assessment for Fionetix Solutions**.
 
----
+This application manages employee records along with their family relationships, provides fast search capabilities, and supports PDF reporting for employee data.
 
-# Project Overview
-
-This project is a _Full-Stack Employee Management System_ built for the Bangladesh context.
-
-The system manages:
-
-- Employee profiles
-- Family relationships (Spouse and Children)
-- Global search
-- PDF reporting
-- Role-based access (Admin / Viewer)
-
-The application is built using a _React frontend_ and _ASP.NET Core Web API backend_ with _PostgreSQL database_.
+The system is designed specifically for the **Bangladesh context**, including validation for Bangladeshi NID numbers and phone formats.
 
 ---
 
@@ -25,9 +12,10 @@ The application is built using a _React frontend_ and _ASP.NET Core Web API back
 
 ## Backend
 
-- ASP.NET Core Web API (.NET)
+- .NET 10 Web API
 - Entity Framework Core
 - PostgreSQL
+- FluentValidation
 - QuestPDF (PDF generation)
 
 ## Frontend
@@ -36,103 +24,137 @@ The application is built using a _React frontend_ and _ASP.NET Core Web API back
 - Tailwind CSS
 - Axios
 
+## Architecture
+
+The application follows a **layered architecture** with clear separation of concerns:
+
+- Controllers → API endpoints
+- Services → Business logic
+- Entities → Database models
+- Data → Database context and migrations
+- Validators → Input validation rules
+
 ---
 
-# Core Features
+# Key Features
 
 ## Employee Management
 
-Employees can be created, updated, deleted, and viewed.
+The system supports complete **CRUD operations** for employee records.
 
-Employee fields:
+Each employee contains the following information:
 
 - Name
 - NID (10 or 17 digits)
-- Phone (Bangladesh format)
+- Phone number (Bangladesh format)
 - Department
 - Basic Salary
 
+Employees can be:
+
+- Created
+- Updated
+- Deleted
+- Viewed in a searchable list
+
 ---
 
-## Family Relationships
+## Family Relationship Management
 
-Each employee may have:
+Each employee may contain family members.
 
 ### Spouse
 
+Each employee can have **one spouse**.
+
+Fields:
+
 - Name
 - NID
-- Only _one spouse per employee_
+
+Validation:
+
+- Only one spouse per employee
 
 ### Children
 
+Each employee can have **multiple children**.
+
+Fields:
+
 - Name
 - Date of Birth
-- One employee may have _multiple children_
 
 ---
 
-## Global Search
+## Global Employee Search
 
-The application contains a _single search input_ that filters employees by:
+The application contains a **single global search field** that filters employees by:
 
 - Name
 - NID
 - Department
 
-Features:
+Search functionality includes:
 
-- Case-insensitive search
-- Debounced search (400ms) to reduce API calls
+- Case-insensitive filtering
+- Debounced API calls (~400ms delay)
+- Optimized frontend performance
 
 ---
 
-## PDF Export
+## PDF Reporting
 
-The system supports two PDF export options.
+The system provides two PDF export features.
 
 ### Employee Table Export
 
-Exports the _currently filtered employee list_ as a PDF table.
+Exports the **currently filtered employee list** into a PDF table.
+
+This allows quick generation of reports for filtered results.
 
 ### Employee CV Export
 
-Exports a _single employee CV PDF_ including:
+Generates a detailed **employee CV-style PDF** including:
 
 - Employee information
-- Spouse information
-- Children information
+- Spouse details
+- Children details
 
 ---
 
-## Role System
+## Role-Based Access
 
-Two roles exist in the system.
+The system includes two user roles.
 
 ### Admin
 
 Admin users can:
 
 - Create employees
-- Update employees
+- Update employee records
 - Delete employees
-- Manage spouse and children
+- Manage spouse and children data
 
 ### Viewer
 
-Viewer users can:
+Viewer users have **read-only access**.
 
-- View employees
+They can:
+
+- View employee records
 - Search employees
-- Export PDFs
-
-Viewer mode is _read-only_.
+- Export PDF reports
 
 ---
 
 # Database Design
 
-The system contains three main entities.
+The system uses **PostgreSQL** with **Entity Framework Core**.
+
+Three main entities are used.
+
+---
 
 ## Employee
 
@@ -147,8 +169,8 @@ Fields:
 
 Relationships:
 
-- One-to-One with Spouse
-- One-to-Many with Children
+- One-to-One → Spouse
+- One-to-Many → Children
 
 ---
 
@@ -161,9 +183,9 @@ Fields:
 - NID
 - EmployeeId (Foreign Key)
 
-Relationship:
+Rules:
 
-- Each employee can have _only one spouse_
+- Each employee can have **only one spouse**
 
 ---
 
@@ -176,14 +198,13 @@ Fields:
 - DateOfBirth
 - EmployeeId (Foreign Key)
 
-Relationship:
+Rules:
 
-- One employee can have _multiple children_
+- One employee may have **multiple children**
 
 ---
 
 # Project Structure
-
 ```text
 employee-family-registry
 │
@@ -192,98 +213,145 @@ employee-family-registry
 │   ├── Data
 │   ├── Entities
 │   ├── Services
+│   └── Migrations
 │
 ├── frontend (React UI)
 │   ├── components
 │   ├── pages
 │   ├── services
 │
-├── SRS_Document.md
+├── SRS_Document.pdf
 └── README.md
 ```
 
 ---
+---
 
 # Database Setup (PostgreSQL)
 
-Install PostgreSQL locally.
+Install **PostgreSQL** locally and create a new database.
 
-Create a database:
+Example database name:
 
+```
 employee_registry
+```
 
-Update the connection string in:
+Update the connection string inside the backend configuration file:
 
-appsettings.json
+```
+backend/appsettings.json
+```
 
-Example:
+Example configuration:
 
+```json
 "ConnectionStrings": {
-"DefaultConnection": "Host=localhost;Database=employee_registry;Username=postgres;Password=yourpassword"
+  "DefaultConnection": "Host=localhost;Database=employee_registry;Username=postgres;Password=postgres"
 }
+```
 
 ---
 
-# Run Migrations
+# Run Database Migrations
 
-Inside the backend project folder run:
+Navigate to the **backend project directory** and run the following command:
 
+```
 dotnet ef database update
+```
 
-This command will create the database tables.
+This command will automatically create the required database tables using **Entity Framework Core migrations**.
 
 ---
 
 # Seed Data
 
-The application automatically seeds the database with _10 initial employees_ on the first run.
+The application automatically seeds the database with **10 initial employee records** during the first run.
 
-Example seeded employees include Bangladeshi names such as:
+These records include realistic Bangladeshi employee names such as:
 
-- Tanvir Hasan
-- Rahim Uddin
-- Karim Ahmed
-- Sadia Akter
-- Moushumi Khan
-- Arif Rahman
-- Nusrat Jahan
-- Hasan Mahmud
-- Shakil Ahmed
-- Farhana Islam
+- Tanvir Hasan  
+- Rahim Uddin  
+- Karim Ahmed  
+- Sadia Akter  
+- Moushumi Khan  
+- Arif Rahman  
+- Nusrat Jahan  
+- Hasan Mahmud  
+- Shakil Ahmed  
+- Farhana Islam  
+
+The seeded data helps demonstrate:
+
+- Employee listing
+- Family relationships
+- Search functionality
+- PDF export capabilities
 
 ---
 
 # Running the Backend
 
-Navigate to the backend project folder and run:
+Navigate to the backend directory:
 
+```
+cd backend
+```
+
+Run the backend API:
+
+```
 dotnet run
+```
 
-The backend API will run at:
+The API server will start at:
 
+```
 https://localhost:5026
+```
 
-Swagger API documentation:
+Swagger API documentation will be available at:
 
+```
 https://localhost:5026/swagger
+```
+
+Swagger allows you to:
+
+- Test API endpoints
+- Inspect request/response models
+- Validate backend functionality
 
 ---
 
 # Running the Frontend
 
-Navigate to the frontend project folder.
+Navigate to the frontend directory:
+
+```
+cd frontend
+```
 
 Install dependencies:
 
+```
 npm install
+```
 
 Start the development server:
 
+```
 npm run dev
+```
 
-The frontend will run at:
+The frontend application will run at:
 
+```
 http://localhost:5173
+```
+
+The React interface communicates with the **.NET Web API backend** through REST endpoints.
 
 ---
 
@@ -291,88 +359,136 @@ http://localhost:5173
 
 ## Employee Endpoints
 
-GET /api/Employee  
-POST /api/Employee  
-PUT /api/Employee/{id}  
+Retrieve all employees:
+
+```
+GET /api/Employee
+```
+
+Create a new employee:
+
+```
+POST /api/Employee
+```
+
+Update an employee:
+
+```
+PUT /api/Employee/{id}
+```
+
+Delete an employee:
+
+```
 DELETE /api/Employee/{id}
+```
 
 ---
 
-## Search Endpoint
+## Global Search
 
+Search employees by **Name, NID, or Department**:
+
+```
 GET /api/Employee/search?query=
+```
 
-Search filters employees by:
+Features:
 
-- Name
-- NID
-- Department
-
-The search is _case-insensitive_ and _debounced (400ms)_.
+- Case-insensitive search
+- Debounced requests (≈400ms delay)
+- Fast filtering for large datasets
 
 ---
 
-## Family Endpoints
+## Family Relationship Endpoints
 
 Add spouse:
 
+```
 POST /api/Employee/{id}/spouse
+```
 
 Add child:
 
+```
 POST /api/Employee/{id}/children
+```
+
+These endpoints allow managing family relationships connected to each employee.
 
 ---
 
-## PDF Export
+## PDF Export Endpoints
 
-Export filtered employee list:
+Export filtered employee list as PDF:
 
+```
 GET /api/Employee/export/pdf
+```
 
-Export employee CV:
+Export individual employee CV:
 
+```
 GET /api/Employee/{id}/export/cv
+```
+
+The generated CV PDF includes:
+
+- Employee information
+- Spouse information
+- Children information
 
 ---
 
 # Validation Rules
 
-The system implements several validation rules:
+The system implements several validation rules to ensure data integrity.
 
-- Employee NID must be unique
-- Spouse NID must also be unique
-- NID must be 10 or 17 digits
-- Phone must follow Bangladesh format (start with +880 or 01)
-- Only one spouse is allowed per employee
-- Child requires both name and date of birth
-- Salary defaults to 0 if not provided
+### Employee Validation
+
+- NID must be **unique**
+- NID must be **10 or 17 digits**
+- Phone number must follow **Bangladesh format**
+- Phone must start with **+880 or 01**
+
+### Family Validation
+
+- Each employee can have **only one spouse**
+- Spouse NID must be **unique**
+- Child records must include **Name and Date of Birth**
+
+### Salary Handling
+
+- Basic salary defaults to **0 if not provided**
+
+Validation is implemented using **FluentValidation and backend validation logic**.
 
 ---
 
 # Documentation
 
-The repository also includes an SRS document describing the system design.
+The repository also contains a **System Requirements Specification (SRS) document** describing the architecture and system design.
 
-File name:
+File included in the repository:
 
-SRS_Document.md
+```
+SRS_Document.pdf
+```
 
-Contents include:
+The document includes:
 
 - System Scope
 - Entity Relationship Diagram (ERD)
 - Edge Cases
 - Assumptions
+- System architecture overview
 
 ---
 
 # Author
 
-Technical Assessment Submission
+**Sajidur Rahman Sajid**
 
-Candidate: _Sajidur Rahman SAjid_
-
-For:
-
-Fionetix Solutions
+Submission for: **Fionetix Solutions**  
+.NET Developer Technical Assessment
