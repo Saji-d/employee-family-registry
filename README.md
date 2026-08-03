@@ -1,38 +1,33 @@
 # Employee & Family Registry System
 
-A full-stack **Employee Management System** developed as part of the **.NET Developer Technical Assessment for Fionetix Solutions**.
+<p align="center">
 
-This application manages employee records along with their family relationships, provides fast search capabilities, and supports PDF reporting for employee data.
+![.NET](https://img.shields.io/badge/.NET%2010-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Entity Framework Core](https://img.shields.io/badge/Entity%20Framework%20Core-6DB33F?style=for-the-badge)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38BDF8?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-The system is designed specifically for the **Bangladesh context**, including validation for Bangladeshi NID numbers and phone formats.
+</p>
+
+A full-stack **Employee Management System** built with **ASP.NET Core**, **React**, and **PostgreSQL**.
+
+The application streamlines employee record management by supporting family relationships, advanced search capabilities, PDF report generation, and role-based access control. It demonstrates modern full-stack development practices including layered architecture, RESTful APIs, backend validation, and responsive frontend design.
+
+The system also includes validation tailored for Bangladeshi employee information, including National ID (NID) numbers and phone number formats.
 
 ---
 
 # Technology Stack
 
-## Backend
-
-- .NET 10 Web API
-- Entity Framework Core
-- PostgreSQL
-- FluentValidation
-- QuestPDF (PDF generation)
-
-## Frontend
-
-- React (Vite)
-- Tailwind CSS
-- Axios
-
-## Architecture
-
-The application follows a **layered architecture** with clear separation of concerns:
-
-- Controllers → API endpoints
-- Services → Business logic
-- Entities → Database models
-- Data → Database context and migrations
-- Validators → Input validation rules
+| Category | Technologies |
+|-----------|--------------|
+| Backend | ASP.NET Core (.NET 10), Entity Framework Core |
+| Frontend | React (Vite), Tailwind CSS, Axios |
+| Database | PostgreSQL |
+| Validation | FluentValidation |
+| PDF Generation | QuestPDF |
+| Architecture | Layered Architecture, REST API |
 
 ---
 
@@ -40,45 +35,48 @@ The application follows a **layered architecture** with clear separation of conc
 
 ## Employee Management
 
-The system supports complete **CRUD operations** for employee records.
+The system supports complete CRUD operations for employee records.
 
-Each employee contains the following information:
+Each employee includes:
 
 - Name
-- NID (10 or 17 digits)
-- Phone number (Bangladesh format)
+- National ID (NID)
+- Phone Number
 - Department
 - Basic Salary
 
-Employees can be:
+Supported operations:
 
-- Created
-- Updated
-- Deleted
-- Viewed in a searchable list
+- Create
+- Read
+- Update
+- Delete
+- Search
 
 ---
 
 ## Family Relationship Management
 
-Each employee may contain family members.
+Each employee can manage associated family members.
 
 ### Spouse
 
-Each employee can have **one spouse**.
+Each employee may have one spouse.
 
 Fields:
 
 - Name
-- NID
+- National ID (NID)
 
 Validation:
 
-- Only one spouse per employee
+- One spouse per employee
+
+---
 
 ### Children
 
-Each employee can have **multiple children**.
+Each employee may have multiple children.
 
 Fields:
 
@@ -89,74 +87,69 @@ Fields:
 
 ## Global Employee Search
 
-The application contains a **single global search field** that filters employees by:
+Search employees by:
 
 - Name
-- NID
+- National ID
 - Department
 
-Search functionality includes:
+Features:
 
-- Case-insensitive filtering
-- Debounced API calls (~400ms delay)
+- Case-insensitive search
+- Debounced API requests
+- Fast filtering
 - Optimized frontend performance
 
 ---
 
 ## PDF Reporting
 
-The system provides two PDF export features.
+Generate professional PDF reports.
 
-### Employee Table Export
+### Employee Registry Report
 
-Exports the **currently filtered employee list** into a PDF table.
+Export the currently filtered employee list.
 
-This allows quick generation of reports for filtered results.
+### Employee Profile Report
 
-### Employee CV Export
+Generate an individual employee profile including:
 
-Generates a detailed **employee CV-style PDF** including:
-
-- Employee information
-- Spouse details
-- Children details
+- Employee details
+- Spouse information
+- Children information
 
 ---
 
 ## Role-Based Access
 
-The system includes two user roles.
+### Administrator
 
-### Admin
-
-Admin users can:
+Administrators can:
 
 - Create employees
-- Update employee records
+- Update employee information
 - Delete employees
-- Manage spouse and children data
+- Manage spouse information
+- Manage child information
+- Export reports
+
+---
 
 ### Viewer
 
-Viewer users have **read-only access**.
+Viewers can:
 
-They can:
-
-- View employee records
-- Search employees
+- Browse employees
+- Search employee records
 - Export PDF reports
 
 ---
 
 # Database Design
 
-The system uses **PostgreSQL** with **Entity Framework Core**.
+The application uses **PostgreSQL** with **Entity Framework Core**.
 
-Three main entities are used.
-
----
-
-## Employee
+### Employee
 
 Fields:
 
@@ -174,138 +167,162 @@ Relationships:
 
 ---
 
-## Spouse
+### Spouse
 
 Fields:
 
 - Id
 - Name
 - NID
-- EmployeeId (Foreign Key)
+- EmployeeId
 
-Rules:
+Rule:
 
-- Each employee can have **only one spouse**
+- One spouse per employee
 
 ---
 
-## Child
+### Child
 
 Fields:
 
 - Id
 - Name
 - DateOfBirth
-- EmployeeId (Foreign Key)
+- EmployeeId
 
-Rules:
+Rule:
 
-- One employee may have **multiple children**
+- Multiple children per employee
 
 ---
 
 # Project Structure
+
 ```text
 employee-family-registry
 │
-├── backend (ASP.NET Core API)
+├── backend
 │   ├── Controllers
 │   ├── Data
 │   ├── Entities
 │   ├── Services
+│   ├── Validators
 │   └── Migrations
 │
-├── frontend (React UI)
+├── frontend
 │   ├── components
 │   ├── pages
 │   ├── services
+│   └── assets
 │
 ├── SRS_Document.pdf
 └── README.md
 ```
 
 ---
-## Screenshots
 
-### Employee Registry Dashboard
-Shows the main employee table with search, actions, and family overview.
+# Screenshots
+
+## Employee Registry Dashboard
+
+Main employee management interface.
 
 ![Employee Registry](screenshots/registry.png)
 
 ---
 
-### Global Search (Debounced)
-Search employees by name or other attributes.
+## Global Search
 
-![Search Employees](screenshots/search.png)
+Search employees by name, NID, or department.
+
+![Search](screenshots/search.png)
 
 ---
 
-### Add Employee Form
-Create a new employee with validation for NID, phone number, and salary.
+## Add Employee
+
+Create employee records with validation.
 
 ![Add Employee](screenshots/add-employee.png)
 
 ---
 
-### Employee Form Validation
-Client-side validation for NID format and Bangladesh phone number.
+## Employee Validation
 
-![Employee Validation](screenshots/employee-validation.png)
+Validation for NID, phone number, and salary.
+
+![Validation](screenshots/employee-validation.png)
 
 ---
 
-### Edit Employee
-Update employee information such as department, phone, or salary.
+## Edit Employee
+
+Update employee information.
 
 ![Edit Employee](screenshots/edit-employee.png)
 
 ---
 
-### Family Management
-Add spouse (one-to-one relationship) and children (one-to-many relationship).
+## Family Management
 
-![Family Management](screenshots/family.png)
+Manage spouse and children relationships.
+
+![Family](screenshots/family.png)
 
 ---
 
-### Family Validation
-Prevents adding more than one spouse and validates child information.
+## Family Validation
+
+Relationship validation and business rules.
 
 ![Family Validation](screenshots/family-validation.png)
 
 ---
 
-### Employee Profile PDF (CV Export)
-Export a detailed PDF profile for an individual employee.
+## Employee Profile PDF
 
-![Employee CV PDF](screenshots/pdf-cv.png)
+Individual employee profile export.
+
+![Employee CV](screenshots/pdf-cv.png)
 
 ---
 
-### Employee Registry PDF Export
-Generate a full PDF report of the employee registry.
+## Employee Registry PDF
 
-![Registry PDF Export](screenshots/pdf-list.png)
+Generate registry reports.
+
+![Registry PDF](screenshots/pdf-list.png)
+
 ---
 
-# Database Setup (PostgreSQL)
+# Getting Started
 
-Install **PostgreSQL** locally and create a new database.
+## Clone Repository
 
-Example database name:
+```bash
+git clone https://github.com/Saji-d/employee-family-registry.git
+```
+
+---
+
+## Configure PostgreSQL
+
+Create a PostgreSQL database.
+
+Example:
 
 ```
 employee_registry
 ```
 
-Update the connection string inside the backend configuration file:
+Update the connection string inside:
 
 ```
 backend/appsettings.json
 ```
 
-Example configuration:
+Example:
 
 ```json
 "ConnectionStrings": {
@@ -315,236 +332,166 @@ Example configuration:
 
 ---
 
-# Run Database Migrations
+## Apply Database Migrations
 
-Navigate to the **backend project directory** and run the following command:
+Navigate to the backend directory.
 
-```
-dotnet ef database update
-```
-
-This command will automatically create the required database tables using **Entity Framework Core migrations**.
-
----
-
-# Seed Data
-
-The application automatically seeds the database with **10 initial employee records** during the first run.
-
-These records include realistic Bangladeshi employee names such as:
-
-- Tanvir Hasan  
-- Rahim Uddin  
-- Karim Ahmed  
-- Sadia Akter  
-- Moushumi Khan  
-- Arif Rahman  
-- Nusrat Jahan  
-- Hasan Mahmud  
-- Shakil Ahmed  
-- Farhana Islam  
-
-The seeded data helps demonstrate:
-
-- Employee listing
-- Family relationships
-- Search functionality
-- PDF export capabilities
-
----
-
-# Running the Backend
-
-Navigate to the backend directory:
-
-```
+```bash
 cd backend
 ```
 
-Run the backend API:
+Run:
 
+```bash
+dotnet ef database update
 ```
+
+The required tables will be created automatically.
+
+---
+
+## Sample Data
+
+The application automatically seeds the database with sample employee records during the first run, allowing the core functionality to be explored immediately without manual data entry.
+
+---
+
+## Run Backend
+
+```bash
+cd backend
 dotnet run
 ```
 
-The API server will start at:
+Backend:
 
 ```
 https://localhost:5026
 ```
 
-Swagger API documentation will be available at:
+Swagger:
 
 ```
 https://localhost:5026/swagger
 ```
 
-Swagger allows you to:
-
-- Test API endpoints
-- Inspect request/response models
-- Validate backend functionality
-
 ---
 
-# Running the Frontend
+## Run Frontend
 
-Navigate to the frontend directory:
-
-```
+```bash
 cd frontend
-```
-
-Install dependencies:
-
-```
 npm install
-```
-
-Start the development server:
-
-```
 npm run dev
 ```
 
-The frontend application will run at:
+Frontend:
 
 ```
 http://localhost:5173
 ```
 
-The React interface communicates with the **.NET Web API backend** through REST endpoints.
-
 ---
 
-# API Endpoints
+# REST API Overview
 
-## Employee Endpoints
+## Employee
 
-Retrieve all employees:
-
-```
-GET /api/Employee
-```
-
-Create a new employee:
-
-```
-POST /api/Employee
-```
-
-Update an employee:
-
-```
-PUT /api/Employee/{id}
-```
-
-Delete an employee:
-
-```
+```http
+GET    /api/Employee
+POST   /api/Employee
+PUT    /api/Employee/{id}
 DELETE /api/Employee/{id}
 ```
 
 ---
 
-## Global Search
+## Search
 
-Search employees by **Name, NID, or Department**:
-
-```
+```http
 GET /api/Employee/search?query=
 ```
 
-Features:
+Supports searching by:
 
-- Case-insensitive search
-- Debounced requests (≈400ms delay)
-- Fast filtering for large datasets
+- Name
+- NID
+- Department
 
 ---
 
-## Family Relationship Endpoints
+## Family
 
-Add spouse:
-
-```
+```http
 POST /api/Employee/{id}/spouse
-```
-
-Add child:
-
-```
 POST /api/Employee/{id}/children
 ```
 
-These endpoints allow managing family relationships connected to each employee.
-
 ---
 
-## PDF Export Endpoints
+## PDF Export
 
-Export filtered employee list as PDF:
-
-```
+```http
 GET /api/Employee/export/pdf
-```
-
-Export individual employee CV:
-
-```
 GET /api/Employee/{id}/export/cv
 ```
-
-The generated CV PDF includes:
-
-- Employee information
-- Spouse information
-- Children information
 
 ---
 
 # Validation Rules
 
-The system implements several validation rules to ensure data integrity.
+## Employee
 
-### Employee Validation
+- Unique National ID
+- Valid 10 or 17-digit NID
+- Bangladesh phone number validation
+- Required employee information
 
-- NID must be **unique**
-- NID must be **10 or 17 digits**
-- Phone number must follow **Bangladesh format**
-- Phone must start with **+880 or 01**
+---
 
-### Family Validation
+## Family
 
-- Each employee can have **only one spouse**
-- Spouse NID must be **unique**
-- Child records must include **Name and Date of Birth**
+- One spouse per employee
+- Unique spouse NID
+- Required child information
 
-### Salary Handling
+---
 
-- Basic salary defaults to **0 if not provided**
+## Salary
 
-Validation is implemented using **FluentValidation and backend validation logic**.
+- Defaults to 0 if not provided
+
+---
+
+# Learning Outcomes
+
+This project demonstrates practical experience with:
+
+- ASP.NET Core Web API
+- React + Vite
+- PostgreSQL
+- Entity Framework Core
+- Layered Architecture
+- RESTful API Design
+- CRUD Operations
+- FluentValidation
+- QuestPDF
+- Role-Based Authorization
+- Full-Stack Application Development
 
 ---
 
 # Documentation
 
-The repository also contains a **System Requirements Specification (SRS) document** describing the architecture and system design.
+The repository also includes a Software Requirements Specification (SRS) document describing the application's architecture and design.
 
-File included in the repository:
+Topics covered include:
 
-```
-SRS_Document.pdf
-```
-
-The document includes:
-
-- System Scope
+- Functional Requirements
 - Entity Relationship Diagram (ERD)
-- Edge Cases
+- System Architecture
 - Assumptions
-- System architecture overview
+- Edge Cases
 
 ---
 
@@ -552,5 +499,6 @@ The document includes:
 
 **Sajidur Rahman Sajid**
 
-Submission for: **Fionetix Solutions**  
-.NET Developer Technical Assessment
+B.Sc. in Computer Science & Engineering
+
+American International University-Bangladesh (AIUB)
