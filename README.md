@@ -12,7 +12,7 @@
 
 A full-stack **Employee Management System** built with **ASP.NET Core**, **React**, and **PostgreSQL**.
 
-The application streamlines employee record management by supporting family relationships, advanced search capabilities, PDF report generation, and role-based access control. It demonstrates modern full-stack development practices including layered architecture, RESTful APIs, backend validation, and responsive frontend design.
+The application streamlines employee record management by supporting family relationships, advanced search capabilities, PDF report generation, and an Admin / Viewer role toggle in the UI (not yet enforced server-side). It demonstrates modern full-stack development practices including layered architecture, RESTful APIs, backend validation, and responsive frontend design.
 
 The system also includes validation tailored for Bangladeshi employee information, including National ID (NID) numbers and phone number formats.
 
@@ -120,7 +120,9 @@ Generate an individual employee profile including:
 
 ---
 
-## Role-Based Access
+## Role-Based Access (UI level)
+
+> Roles are switched in the frontend; the API does not yet enforce them (no server-side authorization).
 
 ### Administrator
 
@@ -476,7 +478,7 @@ This project demonstrates practical experience with:
 - CRUD Operations
 - FluentValidation
 - QuestPDF
-- Role-Based Authorization
+- Role-based UI (Admin / Viewer)
 - Full-Stack Application Development
 
 ---
