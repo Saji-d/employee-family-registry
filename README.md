@@ -1,506 +1,262 @@
-# Employee & Family Registry System
+<div align="center">
 
-<p align="center">
+<img src="assets/banner.svg" alt="Employee Registry banner" width="100%">
 
-![.NET](https://img.shields.io/badge/.NET%2010-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
-![Entity Framework Core](https://img.shields.io/badge/Entity%20Framework%20Core-6DB33F?style=for-the-badge)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38BDF8?style=for-the-badge&logo=tailwind-css&logoColor=white)
+<p><code>Employee registry with spouse and children records, search and PDF exports: ASP.NET Core, PostgreSQL and React</code></p>
 
+<p>
+<a href="https://github.com/Saji-d/employee-family-registry"><img src="https://img.shields.io/badge/SOURCE-GitHub-8B7CF6?style=for-the-badge&logo=github&logoColor=C084FC&labelColor=0B0E1A" alt="Source"></a>
+<img src="https://img.shields.io/badge/STATUS-Academic%20project-6366F1?style=for-the-badge&labelColor=0B0E1A" alt="Status: academic project">
+<a href="SRS_Document.pdf"><img src="https://img.shields.io/badge/DOCS-SRS%20document-22d3ee?style=for-the-badge&labelColor=0B0E1A" alt="SRS document"></a>
 </p>
 
-A full-stack **Employee Management System** built with **ASP.NET Core**, **React**, and **PostgreSQL**.
+<p>
+<img src="https://img.shields.io/badge/.NET%2010-0B0E1A?style=flat-square&logo=dotnet&logoColor=8B7CF6" alt=".NET 10">
+<img src="https://img.shields.io/badge/ASP.NET%20Core-0B0E1A?style=flat-square&logo=dotnet&logoColor=8B7CF6" alt="ASP.NET Core">
+<img src="https://img.shields.io/badge/EF%20Core-0B0E1A?style=flat-square&logo=dotnet&logoColor=8B7CF6" alt="EF Core">
+<img src="https://img.shields.io/badge/PostgreSQL-0B0E1A?style=flat-square&logo=postgresql&logoColor=8B7CF6" alt="PostgreSQL">
+<img src="https://img.shields.io/badge/React%2019-0B0E1A?style=flat-square&logo=react&logoColor=8B7CF6" alt="React 19">
+<img src="https://img.shields.io/badge/Vite-0B0E1A?style=flat-square&logo=vite&logoColor=8B7CF6" alt="Vite">
+<img src="https://img.shields.io/badge/Tailwind%20CSS-0B0E1A?style=flat-square&logo=tailwindcss&logoColor=8B7CF6" alt="Tailwind CSS">
+<img src="https://img.shields.io/badge/Swagger-0B0E1A?style=flat-square&logo=swagger&logoColor=8B7CF6" alt="Swagger">
+</p>
 
-The application streamlines employee record management by supporting family relationships, advanced search capabilities, PDF report generation, and an Admin / Viewer role toggle in the UI (not yet enforced server-side). It demonstrates modern full-stack development practices including layered architecture, RESTful APIs, backend validation, and responsive frontend design.
+<p>
+<a href="#-overview">Overview</a> · <a href="#-highlights">Highlights</a> · <a href="#-preview">Preview</a> · <a href="#-architecture">Architecture</a> · <a href="#-tech-stack">Tech Stack</a> · <a href="#-getting-started">Getting Started</a> · <a href="#-project-structure">Structure</a> · <a href="#-roadmap">Roadmap</a> · <a href="#-author">Author</a>
+</p>
 
-The system also includes validation tailored for Bangladeshi employee information, including National ID (NID) numbers and phone number formats.
+</div>
 
----
+<img src="assets/divider.svg" width="100%" alt="">
 
-# Technology Stack
+## ◈ Overview
 
-| Category | Technologies |
-|-----------|--------------|
-| Backend | ASP.NET Core (.NET 10), Entity Framework Core |
-| Frontend | React (Vite), Tailwind CSS, Axios |
-| Database | PostgreSQL |
-| Validation | FluentValidation |
-| PDF Generation | QuestPDF |
-| Architecture | Layered Architecture, REST API |
+A full-stack employee management app. Staff records carry a spouse and any number of children; the registry can be searched and exported to PDF. It also validates Bangladeshi identifiers: National ID numbers (10 or 17 digits) and phone numbers.
 
----
+It is an academic project built with a Software Requirements Specification: the repository includes [`SRS_Document.pdf`](SRS_Document.pdf) with the requirements, ERD, architecture, assumptions and edge cases.
 
-# Key Features
+> **Honest scope.** The Admin and Viewer switch is a UI-level toggle only. The API has no authentication or authorization, so treat it as a demo of the role-based interface and not as access control. CORS allows only `http://localhost:5173`.
 
-## Employee Management
+<img src="assets/divider.svg" width="100%" alt="">
 
-The system supports complete CRUD operations for employee records.
-
-Each employee includes:
-
-- Name
-- National ID (NID)
-- Phone Number
-- Department
-- Basic Salary
-
-Supported operations:
-
-- Create
-- Read
-- Update
-- Delete
-- Search
-
----
-
-## Family Relationship Management
-
-Each employee can manage associated family members.
-
-### Spouse
-
-Each employee may have one spouse.
-
-Fields:
-
-- Name
-- National ID (NID)
-
-Validation:
-
-- One spouse per employee
-
----
-
-### Children
-
-Each employee may have multiple children.
-
-Fields:
-
-- Name
-- Date of Birth
-
----
-
-## Global Employee Search
-
-Search employees by:
-
-- Name
-- National ID
-- Department
-
-Features:
-
-- Case-insensitive search
-- Debounced API requests
-- Fast filtering
-- Optimized frontend performance
-
----
-
-## PDF Reporting
-
-Generate professional PDF reports.
-
-### Employee Registry Report
-
-Export the currently filtered employee list.
-
-### Employee Profile Report
-
-Generate an individual employee profile including:
-
-- Employee details
-- Spouse information
-- Children information
-
----
-
-## Role-Based Access (UI level)
-
-> Roles are switched in the frontend; the API does not yet enforce them (no server-side authorization).
-
-### Administrator
-
-Administrators can:
-
-- Create employees
-- Update employee information
-- Delete employees
-- Manage spouse information
-- Manage child information
-- Export reports
-
----
-
-### Viewer
-
-Viewers can:
-
-- Browse employees
-- Search employee records
-- Export PDF reports
-
----
-
-# Database Design
-
-The application uses **PostgreSQL** with **Entity Framework Core**.
-
-### Employee
-
-Fields:
-
-- Id
-- Name
-- NID
-- Phone
-- Department
-- BasicSalary
-
-Relationships:
-
-- One-to-One → Spouse
-- One-to-Many → Children
-
----
-
-### Spouse
-
-Fields:
-
-- Id
-- Name
-- NID
-- EmployeeId
-
-Rule:
-
-- One spouse per employee
-
----
-
-### Child
-
-Fields:
-
-- Id
-- Name
-- DateOfBirth
-- EmployeeId
-
-Rule:
-
-- Multiple children per employee
-
----
-
-# Project Structure
+## ◈ Highlights
+
+<table width="100%">
+<tr>
+<td width="33%" valign="top">
+
+**Employee CRUD**<br/>
+Create, read, update and delete employees with name, NID, phone, department and basic salary.
+
+</td>
+<td width="33%" valign="top">
+
+**Family records**<br/>
+One spouse per employee and any number of children with date of birth, with the rules enforced by the API.
+
+</td>
+<td width="33%" valign="top">
+
+**Global search**<br/>
+Case-insensitive search by name, NID or department with debounced requests from the UI.
+
+</td>
+</tr>
+<tr>
+<td width="33%" valign="top">
+
+**PDF reports**<br/>
+Export the filtered registry list or a single employee profile, generated server-side with QuestPDF.
+
+</td>
+<td width="33%" valign="top">
+
+**Local validation rules**<br/>
+Unique NID, 10 or 17 digit NID format, Bangladesh phone format and a unique spouse NID.
+
+</td>
+<td width="33%" valign="top">
+
+**Seeded demo data**<br/>
+Ten sample employees are inserted on first run, so the app is explorable straight away.
+
+</td>
+</tr>
+</table>
+
+<img src="assets/divider.svg" width="100%" alt="">
+
+## ◈ Preview
+
+<div align="center">
+<img src="docs/preview.webp" alt="Employee registry preview" width="100%">
+</div>
+
+<br/>
+
+<table width="100%">
+<tr>
+<td width="50%" align="center"><img src="docs/screenshots/registry.webp" alt="Employee registry dashboard"><br/><sub>Registry dashboard</sub></td>
+<td width="50%" align="center"><img src="docs/screenshots/search.webp" alt="Search results"><br/><sub>Global search</sub></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="docs/screenshots/add-employee.webp" alt="Add employee form"><br/><sub>Add employee</sub></td>
+<td width="50%" align="center"><img src="docs/screenshots/employee-validation.webp" alt="Employee validation errors"><br/><sub>NID, phone and salary validation</sub></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="docs/screenshots/family.webp" alt="Family management"><br/><sub>Spouse and children</sub></td>
+<td width="50%" align="center"><img src="docs/screenshots/pdf-cv.webp" alt="Employee profile PDF"><br/><sub>Employee profile PDF</sub></td>
+</tr>
+</table>
+
+<img src="assets/divider.svg" width="100%" alt="">
+
+## ◈ Architecture
+
+The React UI talks to a single REST controller. EF Core maps three entities to PostgreSQL. A QuestPDF service renders the reports.
+
+```mermaid
+flowchart LR
+  UI["React + Vite + Tailwind<br/>Employees page, AddEmployee,<br/>EditEmployee, FamilyManager"] -- "axios (localhost:5026/api)" --> API
+  subgraph API["ASP.NET Core API (.NET 10)"]
+    C[EmployeeController] --> DB[AppDbContext<br/>EF Core + Npgsql]
+    C --> PDF[EmployeePdfService<br/>QuestPDF]
+    SEED[DbSeeder] --> DB
+  end
+  DB --> PG[("PostgreSQL")]
+  SW[Swagger UI] -.-> C
+```
+
+```mermaid
+erDiagram
+  EMPLOYEE ||--o| SPOUSE : "has one"
+  EMPLOYEE ||--o{ CHILD : "has many"
+  EMPLOYEE {
+    int Id
+    string Name
+    string NID
+    string Phone
+    string Department
+    decimal BasicSalary
+  }
+  SPOUSE {
+    int Id
+    string Name
+    string NID
+    int EmployeeId
+  }
+  CHILD {
+    int Id
+    string Name
+    date DateOfBirth
+    int EmployeeId
+  }
+```
+
+<details>
+<summary><strong>REST API overview</strong></summary>
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/api/Employee` | List employees with spouse and children |
+| GET | `/api/Employee/{id}` | Get one employee |
+| GET | `/api/Employee/search?query=` | Search by name, NID or department |
+| POST | `/api/Employee` | Create an employee (NID must be unique) |
+| PUT | `/api/Employee/{id}` | Update an employee |
+| DELETE | `/api/Employee/{id}` | Delete an employee |
+| POST | `/api/Employee/{id}/spouse` | Add a spouse (one per employee, unique NID) |
+| POST | `/api/Employee/{id}/children` | Add a child |
+| GET | `/api/Employee/export/pdf?query=` | PDF of the (optionally filtered) registry |
+| GET | `/api/Employee/{id}/export/cv` | PDF profile of one employee |
+
+</details>
+
+<img src="assets/divider.svg" width="100%" alt="">
+
+## ◈ Tech Stack
+
+| Layer | Technologies | Purpose |
+|---|---|---|
+| API | ASP.NET Core on .NET 10, Swashbuckle (Swagger) | REST endpoints and interactive docs |
+| Data | Entity Framework Core, Npgsql, PostgreSQL | ORM, migrations and storage |
+| Validation | DataAnnotations on the entities plus controller checks | NID, phone and family rules |
+| Reports | QuestPDF (Community licence) | Registry and profile PDFs |
+| Frontend | React 19, Vite, Tailwind CSS 3, Axios | Registry UI |
+
+<img src="assets/divider.svg" width="100%" alt="">
+
+## ◈ Getting Started
+
+**Prerequisites:** .NET 10 SDK, Node.js 18 or newer, PostgreSQL and the `dotnet-ef` tool (`dotnet tool install --global dotnet-ef`).
+
+**1. Database.** Create an empty PostgreSQL database such as `employee_registry`, then set `ConnectionStrings:DefaultConnection` in `backend/EmployeeRegistry.Api/appsettings.json` (or in your user secrets) to point at it.
+
+**2. Backend.** The seeder runs on startup, so apply the migration first.
+
+```bash
+cd backend/EmployeeRegistry.Api
+dotnet ef database update
+dotnet run          # http://localhost:5026, Swagger at /swagger
+```
+
+**3. Frontend.** The API base URL is set to `http://localhost:5026/api` in `src/services/api.js`.
+
+```bash
+cd frontend/employee-registry-ui
+npm install
+npm run dev         # http://localhost:5173
+```
+
+<img src="assets/divider.svg" width="100%" alt="">
+
+## ◈ Project Structure
+
+<details>
+<summary><strong>Show the tree</strong></summary>
 
 ```text
-employee-family-registry
-│
-├── backend
-│   ├── Controllers
-│   ├── Data
-│   ├── Entities
-│   ├── Services
-│   ├── Validators
-│   └── Migrations
-│
-├── frontend
-│   ├── components
-│   ├── pages
-│   ├── services
-│   └── assets
-│
-├── SRS_Document.pdf
-└── README.md
+.
+├── backend/EmployeeRegistry.Api/
+│   ├── Controllers/       # EmployeeController
+│   ├── Data/              # AppDbContext, DbSeeder
+│   ├── Entities/          # Employee, Spouse, Child
+│   ├── Services/          # EmployeePdfService (QuestPDF)
+│   ├── Migrations/        # EF Core migration
+│   └── Program.cs
+├── frontend/employee-registry-ui/
+│   └── src/
+│       ├── components/    # AddEmployee, EditEmployee, FamilyManager
+│       ├── pages/         # Employees
+│       └── services/      # api.js (Axios client)
+├── docs/                  # preview and screenshots
+├── screenshots/           # original captures
+└── SRS_Document.pdf
 ```
 
----
+</details>
 
-# Screenshots
+<img src="assets/divider.svg" width="100%" alt="">
 
-## Employee Registry Dashboard
+## ◈ Roadmap
 
-Main employee management interface.
+- [x] Employee CRUD with spouse and children
+- [x] Search and PDF exports
+- [x] Seed data and SRS document
+- [ ] Real authentication and server-side role enforcement
+- [ ] Move the API base URL and CORS origin into configuration
+- [ ] Automated tests for the controller and validation rules
 
-![Employee Registry](screenshots/registry.png)
+<img src="assets/divider.svg" width="100%" alt="">
 
----
+## ◈ Author
 
-## Global Search
+**Sajidur Rahman Sajid**: Full-Stack Developer and AI engineer from Dhaka. BSc in Computer Science and Engineering, American International University-Bangladesh (AIUB).
 
-Search employees by name, NID, or department.
+<p>
+<a href="https://www.sajidur.me"><img src="https://img.shields.io/badge/Portfolio-0B0E1A?style=for-the-badge&logo=googlechrome&logoColor=9B8CFA" alt="Portfolio"></a>
+<a href="https://www.linkedin.com/in/sajidur-rahman-sajid/"><img src="https://img.shields.io/badge/LinkedIn-0B0E1A?style=for-the-badge&logo=linkedin&logoColor=8B7CF6" alt="LinkedIn"></a>
+<a href="https://github.com/Saji-d"><img src="https://img.shields.io/badge/GitHub-0B0E1A?style=for-the-badge&logo=github&logoColor=EEF0FA" alt="GitHub"></a>
+<a href="mailto:sajidsajidurrahman99@gmail.com"><img src="https://img.shields.io/badge/Email-0B0E1A?style=for-the-badge&logo=gmail&logoColor=9B8CFA" alt="Email"></a>
+</p>
 
-![Search](screenshots/search.png)
-
----
-
-## Add Employee
-
-Create employee records with validation.
-
-![Add Employee](screenshots/add-employee.png)
-
----
-
-## Employee Validation
-
-Validation for NID, phone number, and salary.
-
-![Validation](screenshots/employee-validation.png)
-
----
-
-## Edit Employee
-
-Update employee information.
-
-![Edit Employee](screenshots/edit-employee.png)
-
----
-
-## Family Management
-
-Manage spouse and children relationships.
-
-![Family](screenshots/family.png)
-
----
-
-## Family Validation
-
-Relationship validation and business rules.
-
-![Family Validation](screenshots/family-validation.png)
-
----
-
-## Employee Profile PDF
-
-Individual employee profile export.
-
-![Employee CV](screenshots/pdf-cv.png)
-
----
-
-## Employee Registry PDF
-
-Generate registry reports.
-
-![Registry PDF](screenshots/pdf-list.png)
-
----
-
-# Getting Started
-
-## Clone Repository
-
-```bash
-git clone https://github.com/Saji-d/employee-family-registry.git
-```
-
----
-
-## Configure PostgreSQL
-
-Create a PostgreSQL database.
-
-Example:
-
-```
-employee_registry
-```
-
-Update the connection string inside:
-
-```
-backend/appsettings.json
-```
-
-Example:
-
-```json
-"ConnectionStrings": {
-  "DefaultConnection": "Host=localhost;Database=employee_registry;Username=postgres;Password=postgres"
-}
-```
-
----
-
-## Apply Database Migrations
-
-Navigate to the backend directory.
-
-```bash
-cd backend
-```
-
-Run:
-
-```bash
-dotnet ef database update
-```
-
-The required tables will be created automatically.
-
----
-
-## Sample Data
-
-The application automatically seeds the database with sample employee records during the first run, allowing the core functionality to be explored immediately without manual data entry.
-
----
-
-## Run Backend
-
-```bash
-cd backend
-dotnet run
-```
-
-Backend:
-
-```
-https://localhost:5026
-```
-
-Swagger:
-
-```
-https://localhost:5026/swagger
-```
-
----
-
-## Run Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Frontend:
-
-```
-http://localhost:5173
-```
-
----
-
-# REST API Overview
-
-## Employee
-
-```http
-GET    /api/Employee
-POST   /api/Employee
-PUT    /api/Employee/{id}
-DELETE /api/Employee/{id}
-```
-
----
-
-## Search
-
-```http
-GET /api/Employee/search?query=
-```
-
-Supports searching by:
-
-- Name
-- NID
-- Department
-
----
-
-## Family
-
-```http
-POST /api/Employee/{id}/spouse
-POST /api/Employee/{id}/children
-```
-
----
-
-## PDF Export
-
-```http
-GET /api/Employee/export/pdf
-GET /api/Employee/{id}/export/cv
-```
-
----
-
-# Validation Rules
-
-## Employee
-
-- Unique National ID
-- Valid 10 or 17-digit NID
-- Bangladesh phone number validation
-- Required employee information
-
----
-
-## Family
-
-- One spouse per employee
-- Unique spouse NID
-- Required child information
-
----
-
-## Salary
-
-- Defaults to 0 if not provided
-
----
-
-# Learning Outcomes
-
-This project demonstrates practical experience with:
-
-- ASP.NET Core Web API
-- React + Vite
-- PostgreSQL
-- Entity Framework Core
-- Layered Architecture
-- RESTful API Design
-- CRUD Operations
-- FluentValidation
-- QuestPDF
-- Role-based UI (Admin / Viewer)
-- Full-Stack Application Development
-
----
-
-# Documentation
-
-The repository also includes a Software Requirements Specification (SRS) document describing the application's architecture and design.
-
-Topics covered include:
-
-- Functional Requirements
-- Entity Relationship Diagram (ERD)
-- System Architecture
-- Assumptions
-- Edge Cases
-
----
-
-# Author
-
-**Sajidur Rahman Sajid**
-
-B.Sc. in Computer Science & Engineering
-
-American International University-Bangladesh (AIUB)
+<sub>Built as an academic full-stack project.</sub>
