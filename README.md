@@ -6,7 +6,7 @@
 
 <p>
 <a href="https://github.com/Saji-d/employee-family-registry"><img src="https://img.shields.io/badge/SOURCE-GitHub-8B7CF6?style=for-the-badge&logo=github&logoColor=C084FC&labelColor=0B0E1A" alt="Source"></a>
-<img src="https://img.shields.io/badge/STATUS-Academic%20project-6366F1?style=for-the-badge&labelColor=0B0E1A" alt="Status: academic project">
+<img src="https://img.shields.io/badge/STATUS-Assessment%20project-6366F1?style=for-the-badge&labelColor=0B0E1A" alt="Status: assessment project">
 <a href="SRS_Document.pdf"><img src="https://img.shields.io/badge/DOCS-SRS%20document-22d3ee?style=for-the-badge&labelColor=0B0E1A" alt="SRS document"></a>
 </p>
 
@@ -21,8 +21,10 @@
 <img src="https://img.shields.io/badge/Swagger-0B0E1A?style=flat-square&logo=swagger&logoColor=8B7CF6" alt="Swagger">
 </p>
 
+> Built as a technical assessment. Independent implementation, not affiliated with or endorsed by any company.
+
 <p>
-<a href="#-overview">Overview</a> · <a href="#-highlights">Highlights</a> · <a href="#-preview">Preview</a> · <a href="#-architecture">Architecture</a> · <a href="#-tech-stack">Tech Stack</a> · <a href="#-getting-started">Getting Started</a> · <a href="#-project-structure">Structure</a> · <a href="#-roadmap">Roadmap</a> · <a href="#-author">Author</a>
+<a href="#-overview">Overview</a> · <a href="#-highlights">Highlights</a> · <a href="#-preview">Preview</a> · <a href="#-architecture">Architecture</a> · <a href="#-tech-stack">Tech Stack</a> · <a href="#-getting-started">Getting Started</a> · <a href="#-project-structure">Structure</a> · <a href="#-author">Author</a>
 </p>
 
 </div>
@@ -33,7 +35,7 @@
 
 A full-stack employee management app. Staff records carry a spouse and any number of children; the registry can be searched and exported to PDF. It also validates Bangladeshi identifiers: National ID numbers (10 or 17 digits) and phone numbers.
 
-It is an academic project built with a Software Requirements Specification: the repository includes [`SRS_Document.pdf`](SRS_Document.pdf) with the requirements, ERD, architecture, assumptions and edge cases.
+It is a technical assessment project, built from a Software Requirements Specification: the repository includes [`SRS_Document.pdf`](SRS_Document.pdf) with the requirements, ERD, architecture, assumptions and edge cases.
 
 > **Honest scope.** The Admin and Viewer switch is a UI-level toggle only. The API has no authentication or authorization, so treat it as a demo of the role-based interface and not as access control. CORS allows only `http://localhost:5173`.
 
@@ -211,8 +213,10 @@ npm run dev         # http://localhost:5173
 
 ## ◈ Project Structure
 
+The `backend/` folder holds the ASP.NET Core API and the `frontend/` folder holds the React UI. `docs/` has the README images and `SRS_Document.pdf` is the specification.
+
 <details>
-<summary><strong>Show the tree</strong></summary>
+<summary>Open the folder map</summary>
 
 ```text
 .
@@ -237,26 +241,16 @@ npm run dev         # http://localhost:5173
 
 <img src="assets/divider.svg" width="100%" alt="">
 
-## ◈ Roadmap
-
-- [x] Employee CRUD with spouse and children
-- [x] Search and PDF exports
-- [x] Seed data and SRS document
-- [ ] Real authentication and server-side role enforcement
-- [ ] Move the API base URL and CORS origin into configuration
-- [ ] Automated tests for the controller and validation rules
-
-<img src="assets/divider.svg" width="100%" alt="">
-
 ## ◈ Author
 
-**Sajidur Rahman Sajid**: Full-Stack Developer and AI engineer from Dhaka. BSc in Computer Science and Engineering, American International University-Bangladesh (AIUB).
+**Sajidur Rahman Sajid**: Full-Stack Developer and AI engineer from Dhaka.<br>
+BSc in CSE at American International University-Bangladesh (AIUB).
 
 <p>
-<a href="https://www.sajidur.me"><img src="https://img.shields.io/badge/Portfolio-0B0E1A?style=for-the-badge&logo=googlechrome&logoColor=9B8CFA" alt="Portfolio"></a>
-<a href="https://www.linkedin.com/in/sajidur-rahman-sajid/"><img src="https://img.shields.io/badge/LinkedIn-0B0E1A?style=for-the-badge&logo=linkedin&logoColor=8B7CF6" alt="LinkedIn"></a>
-<a href="https://github.com/Saji-d"><img src="https://img.shields.io/badge/GitHub-0B0E1A?style=for-the-badge&logo=github&logoColor=EEF0FA" alt="GitHub"></a>
-<a href="mailto:sajidsajidurrahman99@gmail.com"><img src="https://img.shields.io/badge/Email-0B0E1A?style=for-the-badge&logo=gmail&logoColor=9B8CFA" alt="Email"></a>
+  <a href="https://www.sajidur.me"><img src="https://img.shields.io/badge/Portfolio-0B0E1A?style=flat-square&logo=googlechrome&logoColor=9B8CFA" alt="Portfolio"></a>
+  <a href="https://www.linkedin.com/in/sajidur-rahman-sajid/"><img src="https://img.shields.io/badge/LinkedIn-0B0E1A?style=flat-square&logo=linkedin&logoColor=8B7CF6" alt="LinkedIn"></a>
+  <a href="https://github.com/Saji-d"><img src="https://img.shields.io/badge/GitHub-0B0E1A?style=flat-square&logo=github&logoColor=EEF0FA" alt="GitHub"></a>
+  <a href="mailto:sajidsajidurrahman99@gmail.com"><img src="https://img.shields.io/badge/Email-0B0E1A?style=flat-square&logo=gmail&logoColor=9B8CFA" alt="Email"></a>
 </p>
 
-<sub>Built as an academic full-stack project.</sub>
+<sub>Built as a full-stack technical assessment project.</sub>
